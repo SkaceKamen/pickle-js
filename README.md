@@ -1,4 +1,4 @@
-# js pickle
+# pickle js
 
 "Simple" module allowing you to decode pickle encoded data using javascript
 
