@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="pickle.js"></script>
+	<script type="text/javascript">
+		window.onload = function() {
+			var pickled = [40,108,112,48,10,73,49,10,97,73,50,10,97,40,73,51,10,73,52,10,116,112,49,10,97,40,100,112,50,10,40,83,39,97,98,99,39,10,112,51,10,73,53,10,116,112,52,10,86,100,101,102,10,112,53,10,115,97,46],
+				buff = new ArrayBuffer(pickled.length),
+				view = new Uint8Array(buff);
+			for(var i in pickled)
+				view[i] = pickled[i];
+			
+			console.log(pickle.load(buff));
+			
+			/*
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', "NRXWO2LOFVRXILTXN5ZGYZDPMZ2GC3TLOMXG4ZLUHIZDAMBRGU5VG23BMNSUWYLDNBXGCX2FKU======.dat", true);
+			xhr.responseType = 'arraybuffer';
+			xhr.onload = function(e) {
+				console.log("Loading");
+				console.log(pickle.load(xhr.response));
+			}.bind(this);
+			xhr.send();
+			*/
+		}
+	</script>
+</head>
+<body>
+</body>
+</html>
