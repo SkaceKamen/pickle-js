@@ -302,7 +302,7 @@ pickle.readers = {
 		
 		//n = long(ashex, 16) # quadratic time before Python 2.3; linear now
 		//if data[-1] >= '\x80':
-        //n -= 1L << (nbytes * 8)
+		//n -= 1L << (nbytes * 8)
 	},
 	'read_long1': function(view) {
 		return decode_long(view.readChars(this.read_uint1(view)));
@@ -346,172 +346,172 @@ pickle._push = function(stack, arg) {
 
 pickle.opcodes = {
 
-    // Ways to spell integers.
+	// Ways to spell integers.
 
-    'I': {
-        'name': 'INT',
-        'code': 'I',
-        'arg': 'decimalnl_short',
-        'proto': 0,
+	'I': {
+		'name': 'INT',
+		'code': 'I',
+		'arg': 'decimalnl_short',
+		'proto': 0,
 		'dispatch': pickle._push
-    },
-    'J': {
-        'name': 'BININT',
-        'code': 'J',
-        'arg': 'int4',
-        'proto': 1,
+	},
+	'J': {
+		'name': 'BININT',
+		'code': 'J',
+		'arg': 'int4',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
-    'K': {
-        'name': 'BININT1',
-        'code': 'K',
-        'arg': 'uint1',
-        'proto': 1,
+	},
+	'K': {
+		'name': 'BININT1',
+		'code': 'K',
+		'arg': 'uint1',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
-    'M': {
-        'name': 'BININT2',
-        'code': 'M',
-        'arg': 'uint2',
-        'proto': 1,
+	},
+	'M': {
+		'name': 'BININT2',
+		'code': 'M',
+		'arg': 'uint2',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
-    'L': {
-        'name': 'LONG',
-        'code': 'L',
-        'arg': 'decimalnl_long',
-        'proto': 0,
+	},
+	'L': {
+		'name': 'LONG',
+		'code': 'L',
+		'arg': 'decimalnl_long',
+		'proto': 0,
 		'dispatch': pickle._push
-    },
-    '\x8a': {
-        'name': "LONG1",
-        'code': '\x8a',
-        'arg': 'long1',
-        'proto': 2,
+	},
+	'\x8a': {
+		'name': "LONG1",
+		'code': '\x8a',
+		'arg': 'long1',
+		'proto': 2,
 		'dispatch': pickle._push
-    },
-    '\x8b': {
-        'name': "LONG4",
-        'code': '\x8b',
-        'arg': 'long4',
-        'proto': 2,
+	},
+	'\x8b': {
+		'name': "LONG4",
+		'code': '\x8b',
+		'arg': 'long4',
+		'proto': 2,
 		'dispatch': pickle._push
-    },
+	},
 
-    // Ways to spell strings (8-bit, not Unicode).
+	// Ways to spell strings (8-bit, not Unicode).
 
-    'S': {
-        'name': 'STRING',
-        'code': 'S',
-        'arg': 'stringnl',
-        'proto': 0,
+	'S': {
+		'name': 'STRING',
+		'code': 'S',
+		'arg': 'stringnl',
+		'proto': 0,
 		'dispatch': pickle._push
-    },
-    'T': {
-        'name': 'BINSTRING',
-        'code': 'T',
-        'arg': 'string4',
-        'proto': 1,
+	},
+	'T': {
+		'name': 'BINSTRING',
+		'code': 'T',
+		'arg': 'string4',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
-    'U': {
-        'name': 'SHORT_BINSTRING',
-        'code': 'U',
-        'arg': 'string1',
-        'proto': 1,
+	},
+	'U': {
+		'name': 'SHORT_BINSTRING',
+		'code': 'U',
+		'arg': 'string1',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
+	},
 
-    // Ways to spell None.
+	// Ways to spell None.
 
-    'N': {
-        'name': 'NONE',
-        'code': 'N',
-        'arg': null,
-        'proto': 0,
+	'N': {
+		'name': 'NONE',
+		'code': 'N',
+		'arg': null,
+		'proto': 0,
 		'dispatch': pickle._push
-    },
+	},
 
-    // Ways to spell bools, starting with proto 2.  See INT for how this was
-    // done before proto 2.
+	// Ways to spell bools, starting with proto 2.  See INT for how this was
+	// done before proto 2.
 
-    '\x88': {
-        'name': 'NEWTRUE',
-        'code': '\x88',
-        'arg': null,
-        'proto': 2,
+	'\x88': {
+		'name': 'NEWTRUE',
+		'code': '\x88',
+		'arg': null,
+		'proto': 2,
 		'dispatch': function(stack, arg) {
 			stack.push(new pickle.container(true));
 		}
-    },
-    '\x89': {
-        'name': 'NEWFALSE',
-        'code': '\x89',
-        'arg': null,
-        'proto': 2,
+	},
+	'\x89': {
+		'name': 'NEWFALSE',
+		'code': '\x89',
+		'arg': null,
+		'proto': 2,
 		'dispatch': function(stack, arg) {
 			stack.push(new pickle.container(false));
 		}
-    },
+	},
 
-    // Ways to spell Unicode strings.
+	// Ways to spell Unicode strings.
 
-    'V': {
-        'name': 'UNICODE',
-        'code': 'V',
-        'arg': 'unicodestringnl',
-        'proto': 0,
+	'V': {
+		'name': 'UNICODE',
+		'code': 'V',
+		'arg': 'unicodestringnl',
+		'proto': 0,
 		'dispatch': pickle._push
-    },
-    'X': {
-        'name': 'BINUNICODE',
-        'code': 'X',
-        'arg': 'unicodestring4',
-        'proto': 1,
+	},
+	'X': {
+		'name': 'BINUNICODE',
+		'code': 'X',
+		'arg': 'unicodestring4',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
+	},
 
-    // Ways to spell floats.
+	// Ways to spell floats.
 
-    'F': {
-        'name': 'FLOAT',
-        'code': 'F',
-        'arg': 'floatnl',
-        'proto': 0,
+	'F': {
+		'name': 'FLOAT',
+		'code': 'F',
+		'arg': 'floatnl',
+		'proto': 0,
 		'dispatch': pickle._push
-    },
-    'G': {
-        'name': 'BINFLOAT',
-        'code': 'G',
-        'arg': 'float8',
-        'proto': 1,
+	},
+	'G': {
+		'name': 'BINFLOAT',
+		'code': 'G',
+		'arg': 'float8',
+		'proto': 1,
 		'dispatch': pickle._push
-    },
+	},
 
-    // Ways to build lists.
+	// Ways to build lists.
 
-    ']': {
-        'name': 'EMPTY_LIST',
-        'code': ']',
-        'arg': null,
-        'proto': 1,
+	']': {
+		'name': 'EMPTY_LIST',
+		'code': ']',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg) { stack.push(new pickle.container([])); }
-    },
-    'a': {
-        'name': 'APPEND',
-        'code': 'a',
-        'arg': null,
-        'proto': 0,
+	},
+	'a': {
+		'name': 'APPEND',
+		'code': 'a',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			val = stack.popLast().value;
 			stack.last().value.push(val);
 		}
-    },
-    'e': {
-        'name': 'APPENDS',
-        'code': 'e',
-        'arg': null,
-        'proto': 1,
+	},
+	'e': {
+		'name': 'APPENDS',
+		'code': 'e',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg) {
 			//SUCH HACKS, MUCH WOW
 			mark = pickle.mark(stack);
@@ -523,12 +523,12 @@ pickle.opcodes = {
 			}
 			stack.remove(limit);
 		},
-    },
-    'l': {
-        'name': 'LIST',
-        'code': 'l',
-        'arg': null,
-        'proto': 0,
+	},
+	'l': {
+		'name': 'LIST',
+		'code': 'l',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			//SUCH HACKS, MUCH WOW
 			mark = pickle.mark(stack);
@@ -541,22 +541,22 @@ pickle.opcodes = {
 			
 			stack.replace(limit, new pickle.container(list));
 		}
-    },
+	},
 
-    // Ways to build tuples.
+	// Ways to build tuples.
 
-    ')': {
-        'name': 'EMPTY_TUPLE',
-        'code': ')',
-        'arg': null,
-        'proto': 1,
+	')': {
+		'name': 'EMPTY_TUPLE',
+		'code': ')',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg) { stack.push(new pickle.container([])) }
-    },
-    't': {
-        'name': 'TUPLE',
-        'code': 't',
-        'arg': null,
-        'proto': 0,
+	},
+	't': {
+		'name': 'TUPLE',
+		'code': 't',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			//SUCH HACKS, MUCH WOW
 			mark = pickle.mark(stack);
@@ -568,23 +568,23 @@ pickle.opcodes = {
 			}
 			stack.replace(limit, new pickle.container(list));
 		}
-    },
-    '\x85': {
-        'name': 'TUPLE1',
-        'code': '\x85',
-        'arg': null,
-        'proto': 2,
+	},
+	'\x85': {
+		'name': 'TUPLE1',
+		'code': '\x85',
+		'arg': null,
+		'proto': 2,
 		'dispatch': function(stack, arg) {
 			var last = stack.last();
 			stack.push(new pickle.container([last.value]));
 			stack.remove(last);
 		}
-    },
-    '\x86': {
-        'name': 'TUPLE2',
-        'code': '\x86',
-        'arg': null,
-        'proto': 2,
+	},
+	'\x86': {
+		'name': 'TUPLE2',
+		'code': '\x86',
+		'arg': null,
+		'proto': 2,
 		'dispatch': function(stack, arg) {
 			var list = [],
 				iter = stack.getIter(),
@@ -599,12 +599,12 @@ pickle.opcodes = {
 			
 			stack.replace(item, new pickle.container(list));
 		}
-    },
-    '\x87': {
-        'name': 'TUPLE3',
-        'code': '\x87',
-        'arg': null,
-        'proto': 2,
+	},
+	'\x87': {
+		'name': 'TUPLE3',
+		'code': '\x87',
+		'arg': null,
+		'proto': 2,
 		'dispatch': function(stack, arg) {
 			var list = [],
 				iter = stack.getIter(),
@@ -619,22 +619,22 @@ pickle.opcodes = {
 			
 			stack.replace(item, new pickle.container(list));
 		}
-    },
+	},
 
-    // Ways to build dicts.
+	// Ways to build dicts.
 
-    '}': {
-        'name': 'EMPTY_DICT',
-        'code': '}',
-        'arg': null,
-        'proto': 1,
+	'}': {
+		'name': 'EMPTY_DICT',
+		'code': '}',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg) { stack.push(new pickle.container({})) }
-    },
-    'd': {
-        'name': 'DICT',
-        'code': 'd',
-        'arg': null,
-        'proto': 0,
+	},
+	'd': {
+		'name': 'DICT',
+		'code': 'd',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			var mark = pickle.mark(stack),
 				d = {},
@@ -648,24 +648,24 @@ pickle.opcodes = {
 			}
 			stack.replace(limit, new pickle.container(d));
 		}
-    },
-    's': {
-        'name': 'SETITEM',
-        'code': 's',
-        'arg': null,
-        'proto': 0,
+	},
+	's': {
+		'name': 'SETITEM',
+		'code': 's',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			value = stack.popLast().value;
 			key = stack.popLast().value;
 			dict = stack.last().value;
 			dict[key] = value;
 		}
-    },
-    'u': {
-        'name': 'SETITEMS',
-        'code': 'u',
-        'arg': null,
-        'proto': 1,
+	},
+	'u': {
+		'name': 'SETITEMS',
+		'code': 'u',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg) {
 			mark = pickle.mark(stack);
 			limit = mark.current();
@@ -682,42 +682,42 @@ pickle.opcodes = {
 			
 			stack.remove(limit);
 		}
-    },
+	},
 
-    // Stack manipulation.
+	// Stack manipulation.
 
-    '0': {
-        'name': 'POP',
-        'code': '0',
-        'arg': null,
-        'proto': 0,
+	'0': {
+		'name': 'POP',
+		'code': '0',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			stack.popLast();
 		}
-    },
-    '2': {
-        'name': 'DUP',
-        'code': '2',
-        'arg': null,
-        'proto': 0,
+	},
+	'2': {
+		'name': 'DUP',
+		'code': '2',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			stack.push(stack.last());
 		}
-    },
-    '(': {
-        'name': 'MARK',
-        'code': '(',
-        'arg': null,
-        'proto': 0,
+	},
+	'(': {
+		'name': 'MARK',
+		'code': '(',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg) {
 			stack.push(new pickle.marker());
 		}
-    },
-    '1': {
-        'name': 'POP_MARK',
-        'code': '1',
-        'arg': null,
-        'proto': 1,
+	},
+	'1': {
+		'name': 'POP_MARK',
+		'code': '1',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg) {
 			var mark = pickle.mark(stack);
 			stack.remove(mark.current());
@@ -725,206 +725,206 @@ pickle.opcodes = {
 				stack.remove(item);
 			}
 		}
-    },
+	},
 
-    // Memo manipulation.  There are really only two operations (get and put),
-    // each in all-text, "short binary", and "long binary" flavors.
+	// Memo manipulation.  There are really only two operations (get and put),
+	// each in all-text, "short binary", and "long binary" flavors.
 
-    'g': {
-        'name': 'GET',
-        'code': 'g',
-        'arg': 'stringnl_noescape',
-        'proto': 0,
+	'g': {
+		'name': 'GET',
+		'code': 'g',
+		'arg': 'stringnl_noescape',
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			stack.push(memo[arg]);
 		}
-    },
-    'h': {
-        'name': 'BINGET',
-        'code': 'h',
-        'arg': 'uint1',
-        'proto': 1,
+	},
+	'h': {
+		'name': 'BINGET',
+		'code': 'h',
+		'arg': 'uint1',
+		'proto': 1,
 		'dispatch': function(stack, arg, memo) {
 			stack.push(memo[arg]);
 		}
-    },
-    'j': {
-        'name': 'LONG_BINGET',
-        'code': 'j',
-        'arg': 'int4',
-        'proto': 1,
+	},
+	'j': {
+		'name': 'LONG_BINGET',
+		'code': 'j',
+		'arg': 'int4',
+		'proto': 1,
 		'dispatch': function(stack, arg, memo) {
 			stack.push(memo[arg]);
 		}
-    },
-    'p': {
-        'name': 'PUT',
-        'code': 'p',
-        'arg': 'stringnl_noescape',
-        'proto': 0,
+	},
+	'p': {
+		'name': 'PUT',
+		'code': 'p',
+		'arg': 'stringnl_noescape',
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			memo[arg] = stack.last();
 		}
-    },
-    'q': {
-        'name': 'BINPUT',
-        'code': 'q',
-        'arg': 'uint1',
-        'proto': 1,
+	},
+	'q': {
+		'name': 'BINPUT',
+		'code': 'q',
+		'arg': 'uint1',
+		'proto': 1,
 		'dispatch': function(stack, arg, memo) {
 			memo[arg] = stack.last();
 		}
-    },
-    'r': {
-        'name': 'LONG_BINPUT',
-        'code': 'r',
-        'arg': 'int4',
-        'proto': 1,
+	},
+	'r': {
+		'name': 'LONG_BINPUT',
+		'code': 'r',
+		'arg': 'int4',
+		'proto': 1,
 		'dispatch': function(stack, arg, memo) {
 			memo[arg] = stack.last();
 		}
-    },
+	},
 
-    // Access the extension registry (predefined objects).  Akin to the GET
-    // family.
+	// Access the extension registry (predefined objects).  Akin to the GET
+	// family.
 
-    '\x82': {
-        'name': 'EXT1',
-        'code': '\x82',
-        'arg': 'uint1',
-        'proto': 2,
+	'\x82': {
+		'name': 'EXT1',
+		'code': '\x82',
+		'arg': 'uint1',
+		'proto': 2,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode EXT1(" + arg + ")");
 		}
-    },
-    '\x83': {
-        'name': 'EXT2',
-        'code': '\x83',
-        'arg': 'uint2',
-        'proto': 2,
+	},
+	'\x83': {
+		'name': 'EXT2',
+		'code': '\x83',
+		'arg': 'uint2',
+		'proto': 2,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode EXT2(" + arg + ")");
 		}
-    },
-    '\x84': {
-        'name': 'EXT4',
-        'code': '\x84',
-        'arg': 'int4',
-        'proto': 2,
+	},
+	'\x84': {
+		'name': 'EXT4',
+		'code': '\x84',
+		'arg': 'int4',
+		'proto': 2,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode EXT4(" + arg + ")");
 		}
-    },
+	},
 
-    // Push a class object, or module function, on the stack, via its module
-    // and name.
+	// Push a class object, or module function, on the stack, via its module
+	// and name.
 
-    'c': {
-        'name': 'GLOBAL',
-        'code': 'c',
-        'arg': 'stringnl_noescape_pair',
-        'proto': 0,
+	'c': {
+		'name': 'GLOBAL',
+		'code': 'c',
+		'arg': 'stringnl_noescape_pair',
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			stack.push(new pickle.container(pickle.findClass(arg[0], arg[1])));
 			//throw new Error("Unsupported opcode GLOBAL(" + JSON.stringify(arg) + ")");
 		}
-    },
+	},
 
-    // Ways to build objects of classes pickle doesn't know about directly
-    // (user-defined classes).  I despair of documenting this accurately
-    // and comprehensibly -- you really have to read the pickle code to
-    // find all the special cases.
+	// Ways to build objects of classes pickle doesn't know about directly
+	// (user-defined classes).  I despair of documenting this accurately
+	// and comprehensibly -- you really have to read the pickle code to
+	// find all the special cases.
 
-    'R': {
-        'name': 'REDUCE',
-        'code': 'R',
-        'arg': null,
-        'proto': 0,
+	'R': {
+		'name': 'REDUCE',
+		'code': 'R',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			var arg = stack.popLast().value,
 				value = stack.last().value.apply(this, arg.constructor === Array ? arg : [arg]);
 			stack.replace(stack.last(), new pickle.container(value));
 		}
-    },
-    'b': {
-        'name': 'BUILD',
-        'code': 'b',
-        'arg': null,
-        'proto': 0,
+	},
+	'b': {
+		'name': 'BUILD',
+		'code': 'b',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode BUILD");
 		}
-    },
-    'i': {
-        'name': 'INST',
-        'code': 'i',
-        'arg': 'stringnl_noescape_pair',
-        'proto': 0,
+	},
+	'i': {
+		'name': 'INST',
+		'code': 'i',
+		'arg': 'stringnl_noescape_pair',
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode INST(" + JSON.stringify(arg) + ")");
 		}
-    },
-    'o': {
-        'name': 'OBJ',
-        'code': 'o',
-        'arg': null,
-        'proto': 1,
+	},
+	'o': {
+		'name': 'OBJ',
+		'code': 'o',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode OBJ");
 		}
-    },
-    '\x81': {
-        'name': 'NEWOBJ',
-        'code': '\x81',
-        'arg': null,
-        'proto': 2,
+	},
+	'\x81': {
+		'name': 'NEWOBJ',
+		'code': '\x81',
+		'arg': null,
+		'proto': 2,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode NEWOBJ");
 		}
-    },
+	},
 
-    // Machine control.
+	// Machine control.
 
-    '\x80': {
-        'name': 'PROTO',
-        'code': '\x80',
-        'arg': 'uint1',
-        'proto': 2,
+	'\x80': {
+		'name': 'PROTO',
+		'code': '\x80',
+		'arg': 'uint1',
+		'proto': 2,
 		'dispatch': function(stack, arg, memo) {
 			if (arg > 2)
 				throw new Error("Unsupported protocol " + arg);
 		}
-    },
-    '.': {
-        'name': 'STOP',
-        'code': '.',
-        'arg': null,
-        'proto': 0,
+	},
+	'.': {
+		'name': 'STOP',
+		'code': '.',
+		'arg': null,
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			return stack.popLast().value;
 		}
-    },
+	},
 
-    // Ways to deal with persistent IDs.
+	// Ways to deal with persistent IDs.
 
-    'P': {
-        'name': 'PERSID',
-        'code': 'P',
-        'arg': 'stringnl_noescape',
-        'proto': 0,
+	'P': {
+		'name': 'PERSID',
+		'code': 'P',
+		'arg': 'stringnl_noescape',
+		'proto': 0,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode PERSID(" + arg + ")");
 		}
-    },
-    'Q': {
-        'name': 'BINPERSID',
-        'code': 'Q',
-        'arg': null,
-        'proto': 1,
+	},
+	'Q': {
+		'name': 'BINPERSID',
+		'code': 'Q',
+		'arg': null,
+		'proto': 1,
 		'dispatch': function(stack, arg, memo) {
 			throw new Error("Unsupported opcode BINPERSID");
 		}
-    }
+	}
 }
 
 //Used for stack
@@ -1026,7 +1026,7 @@ pickle.linkedList.prototype = {
 	 * Inserts content after specified item
 	 *
 	 * @param object after item to be inserted after
-	 * @param var    obj   content to be inserted
+	 * @param var	obj   content to be inserted
 	 * @return object list item
 	 */
 	insert: function(after, obj) {	
