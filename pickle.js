@@ -252,7 +252,7 @@ pickle.readers = {
 		console.warn('String may not be decoded');
 		// return unicode(data, 'utf-8')
 		
-		return data.getChars(this.read_int4(view));
+		return view.getChars(this.read_int4(view));
 	},
 	'read_decimalnl_short': function(view) {
 		var s = this.read_stringnl(view, false, false);
@@ -286,8 +286,8 @@ pickle.readers = {
 			return 0;
 		
 		//ashex = _binascii.hexlify(data[::-1])
-		for(var i = i.length - 1; i >= 0; i++) {
-			var h = long.charCodeAt(i.length - i).toString(16);
+		for(var i = 0; i < long.length - 1; i += 1) {
+			var h = long.charCodeAt(long.length - i).toString(16);
 			if (h.length == 0)
 				h = "00";
 			if (h.length == 1)
@@ -305,10 +305,10 @@ pickle.readers = {
 		//n -= 1L << (nbytes * 8)
 	},
 	'read_long1': function(view) {
-		return decode_long(view.readChars(this.read_uint1(view)));
+		return this.decode_long(view.getChars(this.read_uint1(view)));
 	},
 	'read_long4': function(view) {
-		return decode_long(view.readChars(this.read_int4(view)));
+		return this.decode_long(view.getChars(this.read_int4(view)));
 	}
 }
 
